@@ -3,9 +3,9 @@
 # Description
 
 # Authors
-Amelia Craigie \n
-Declan Stockdale \n
-Ivan Cheung \n
+Amelia Craigie  
+Declan Stockdale  
+Ivan Cheung  
 Lachlan Denham 13246614
 
 # Structure
