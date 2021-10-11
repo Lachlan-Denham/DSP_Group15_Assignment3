@@ -31,7 +31,7 @@ class Dataset:
     """
       Return list column names of loaded dataset
     """
-    return self.df.columns
+    return list(self.df.columns)
 
   def get_cols_dtype(self):
     """
