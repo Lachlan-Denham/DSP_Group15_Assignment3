@@ -53,6 +53,13 @@ def launchApp():
             st.text(df.get_cols_list())
             st.markdown('**Type of Columns:** ')
             st.dataframe(df.get_cols_dtype().astype(str), 400, 500)
+            rowNumberSlider = st.slider('Select the number of rows to be displayed')
+            st.markdown('**Top Rows of Table**')
+            st.dataframe(df.get_head(rowNumberSlider))
+            st.markdown('**Bottom rows of Table**')
+            st.dataframe(df.get_tail(rowNumberSlider))
+            st.markdown('**Random Sample Rows of Table**')
+            st.dataframe(df.get_sample(rowNumberSlider))
         else:
             st.markdown('**Name of Table:** ')
             st.markdown('**Number of Rows:** ')
@@ -61,6 +68,11 @@ def launchApp():
             st.markdown('**Number of Rows with Missing Values:** ')
             st.markdown('**List of Columns:** ')
             st.markdown('**Type of Columns:** ')
+            st.slider('Select the number of rows to be displayed')
+            st.markdown('**Top Rows of Table**')
+            st.markdown('**Bottom rows of Table**')
+            st.markdown('**Random Sample Rows of Table**')
+
             
         
 
