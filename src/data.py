@@ -55,19 +55,19 @@ class Dataset:
     """
       Return Pandas Dataframe with top rows of loaded dataset
     """
-    return self.df.head()
+    return self.df.head(n)
 
   def get_tail(self, n=5):
     """
       Return Pandas Dataframe with bottom rows of loaded dataset
     """
-    return self.df.tail()
+    return self.df.tail(n)
 
   def get_sample(self, n=5):
     """
       Return Pandas Dataframe with random sampled rows of loaded dataset
     """
-    return self.df.sample()
+    return self.df.sample(n)
 
   def get_numeric_columns(self):
     """
