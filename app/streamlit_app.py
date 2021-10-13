@@ -1,13 +1,15 @@
 # To be filled by students
+from pandas.core.frame import DataFrame
+from pandas.core.series import Series
 import streamlit as st
 import pandas as pd
-from .. import src
+from src.data import Dataset
 
 #containers for each group members section
 
 @st.cache(allow_output_mutation=True)
 def load_csv(csv_file):
-    df = pd.read_csv(csv_file)
+    df = Dataset(csv_file.name, pd.read_csv(csv_file))
     return df
 
 def launchApp():
@@ -41,15 +43,26 @@ def launchApp():
         st.header('Overall Information')
         st.subheader('Section by Lachlan Denham')
 
-        st.markdown('**Name of Table:** ')
-        st.markdown('**Number of Rows:** ')
-        st.markdown('**Number of Columns:** ')
-        st.markdown('**Number of Duplicated Rows:** ')
-        st.markdown('**Number of Rows with Missing Values:** ')
-        st.markdown('**List of Columns:** ')
         if csv_file is not None:
-            st.text(list(df.columns))
-        st.markdown('**Type of Columns:** ')
+            st.markdown('**Name of Table:** ' + df.get_name())
+            st.markdown('**Number of Rows:** ' + str(df.get_n_rows()))
+            st.markdown('**Number of Columns:** ' + str(df.get_n_cols()))
+            st.markdown('**Number of Duplicated Rows:** ' + str(df.get_n_duplicates()))
+            st.markdown('**Number of Rows with Missing Values:** ' + str(df.get_n_missing()))
+            st.markdown('**List of Columns:** ')
+            st.text(df.get_cols_list())
+            st.markdown('**Type of Columns:** ')
+            st.dataframe(df.get_cols_dtype().astype(str), 400, 500)
+        else:
+            st.markdown('**Name of Table:** ')
+            st.markdown('**Number of Rows:** ')
+            st.markdown('**Number of Columns:** ')
+            st.markdown('**Number of Duplicated Rows:** ')
+            st.markdown('**Number of Rows with Missing Values:** ')
+            st.markdown('**List of Columns:** ')
+            st.markdown('**Type of Columns:** ')
+            
+        
 
     with studentB:
         st.header('Information on each numeric column')
