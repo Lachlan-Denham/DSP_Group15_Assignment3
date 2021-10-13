@@ -30,11 +30,6 @@ def launchApp():
 
         #displaying uploaded file information
         if csv_file is not None:
-            file_details = {"filename":csv_file.name, 
-            "filetype":csv_file.type,
-            "filesize":csv_file.size}
-            st.write(file_details)
-
             df = load_csv(csv_file)
 
     #1. 'Overall Information of the Dataset' Section
@@ -60,6 +55,12 @@ def launchApp():
             st.dataframe(df.get_tail(rowNumberSlider))
             st.markdown('**Random Sample Rows of Table**')
             st.dataframe(df.get_sample(rowNumberSlider))
+            conversionSelect = st.selectbox('Which columns do you want to convert to dates', df.get_cols_list())
+            st.write('Current selection: ' + conversionSelect)
+            convertButton = st.button('Convert Selected Column')
+            if convertButton:
+                df.df[conversionSelect] = pd.to_datetime(df.df[conversionSelect])
+                st.experimental_rerun()
         else:
             st.markdown('**Name of Table:** ')
             st.markdown('**Number of Rows:** ')
@@ -72,6 +73,8 @@ def launchApp():
             st.markdown('**Top Rows of Table**')
             st.markdown('**Bottom rows of Table**')
             st.markdown('**Random Sample Rows of Table**')
+            st.selectbox('Which columns do you want to convert to dates', ['N/A'])
+            st.button('Convert Selected Column')
 
             
         
