@@ -5,12 +5,12 @@ import streamlit as st
 import pandas as pd
 from src.data import Dataset
 
-#containers for each group members section
 
+#Function for adding the uploaded dataset to the webpage cache
 @st.cache(allow_output_mutation=True)
 def load_csv(csv_file):
-    df = Dataset(csv_file.name, pd.read_csv(csv_file))
-    return df
+    ds = Dataset(csv_file.name, pd.read_csv(csv_file))
+    return ds
 
 def launchApp():
     
@@ -36,7 +36,7 @@ def launchApp():
 
         #displaying uploaded file information
         if csv_file is not None:
-            df = load_csv(csv_file)
+            ds = load_csv(csv_file)
 
 
 
@@ -55,36 +55,36 @@ def launchApp():
 
             #Denotes overall dataset information using bold markdown text.
             #Also displays the corresponding answers in standard text format through calls to dataclass elements.
-            st.markdown('**Name of Table:** ' + df.get_name())
-            st.markdown('**Number of Rows:** ' + str(df.get_n_rows()))
-            st.markdown('**Number of Columns:** ' + str(df.get_n_cols()))
-            st.markdown('**Number of Duplicated Rows:** ' + str(df.get_n_duplicates()))
-            st.markdown('**Number of Rows with Missing Values:** ' + str(df.get_n_missing()))
+            st.markdown('**Name of Table:** ' + ds.get_name())
+            st.markdown('**Number of Rows:** ' + str(ds.get_n_rows()))
+            st.markdown('**Number of Columns:** ' + str(ds.get_n_cols()))
+            st.markdown('**Number of Duplicated Rows:** ' + str(ds.get_n_duplicates()))
+            st.markdown('**Number of Rows with Missing Values:** ' + str(ds.get_n_missing()))
             
             st.markdown('**List of Columns:** ')
-            st.text(df.get_cols_list())
+            st.text(ds.get_cols_list())
 
             #Denotes the column types and displays the relevant information in a dataframe visual element
             st.markdown('**Type of Columns:** ')
-            st.dataframe(df.get_cols_dtype().astype(str), 400, 500)
+            st.dataframe(ds.get_cols_dtype().astype(str), 400, 500)
             
             #Displays Row samples taken from the beginning, end and randomly from each respective visual element.
             #Implements a slider to determine how many dataframe rows should be displayed in each element.
             rowNumberSlider = st.slider('Select the number of rows to be displayed')
             st.markdown('**Top Rows of Table**')
-            st.dataframe(df.get_head(rowNumberSlider))
+            st.dataframe(ds.get_head(rowNumberSlider))
             st.markdown('**Bottom rows of Table**')
-            st.dataframe(df.get_tail(rowNumberSlider))
+            st.dataframe(ds.get_tail(rowNumberSlider))
             st.markdown('**Random Sample Rows of Table**')
-            st.dataframe(df.get_sample(rowNumberSlider))
+            st.dataframe(ds.get_sample(rowNumberSlider))
 
             #Implements a streamlit selectbox to select a column to be converted into datetime format
             #Utilises a button element to confirm conversion, followed an element rerun to display the converted elements.
-            conversionSelect = st.selectbox('Which columns do you want to convert to dates', df.get_cols_list())
+            conversionSelect = st.selectbox('Which columns do you want to convert to dates', ds.get_cols_list())
             st.write('Current selection: ' + conversionSelect)
             convertButton = st.button('Convert Selected Column')
             if convertButton:
-                df.df[conversionSelect] = pd.to_datetime(df.df[conversionSelect])
+                ds.df[conversionSelect] = pd.to_datetime(ds.df[conversionSelect])
                 st.experimental_rerun()
         
         #Page display elements when no CSV file is accessible. 
@@ -124,5 +124,5 @@ def launchApp():
     
 
 
-    
+
     return
