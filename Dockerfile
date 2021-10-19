@@ -15,6 +15,8 @@ COPY ./src ./src
 
 COPY ./app ./app
 
+COPY main.py /DSP-assigment3-app/
+
 ENTRYPOINT [ "streamlit", "run" ]
 
-CMD ["app/streamlit_app.py"]
+CMD ["main.py"]
