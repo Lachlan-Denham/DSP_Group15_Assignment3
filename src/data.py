@@ -87,3 +87,5 @@ class Dataset:
     """
     return self.df.select_dtypes(include='datetime').columns.to_list()
 
+  def get_series(self, col_name):
+    return self.df[col_name].squeeze()

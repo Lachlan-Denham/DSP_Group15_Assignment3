@@ -5,7 +5,7 @@
 # Authors
 Amelia Craigie  
 Declan Stockdale  
-Ivan Cheung  
+Ivan Cheung 13975420
 Lachlan Denham 13246614
 
 # Structure
