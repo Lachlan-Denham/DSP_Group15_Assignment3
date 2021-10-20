@@ -4,6 +4,7 @@ from pandas.core.series import Series
 import streamlit as st
 import pandas as pd
 from src.data import Dataset
+from src.datetime import DateColumn
 
 
 #Function for adding the uploaded dataset to the webpage cache
@@ -121,51 +122,51 @@ def launchApp():
     with studentD:
         #check if csv has been loaded. Only display this section if csv_file is not None.
         if csv_file is not None:
-        st.header('Information on datetime columns')
-        option = st.selectbox('Select a <Datetime> column to explore:', ds.get_date_columns())
-        
-        #check if a datetime colum has been selected
-        if option is not None:
-            st.markdown('')
-            st.markdown('**Field Name: *' + option + '* **')
-            #create the data series from the selected option
-            date_serie = DateColumn(option, ds.get_series(option))
-
+            st.header('Information on datetime columns')
+            option = st.selectbox('Select a <Datetime> column to explore:', ds.get_date_columns())
             
-            #print table of basic information for this column
-            date_col1, date_col2 = st.columns(2)
+            #check if a datetime colum has been selected
+            if option is not None:
+                st.markdown('')
+                st.markdown('**Field Name: *' + option + '* **')
+                #create the data series from the selected option
+                date_serie = DateColumn(option, ds.get_series(option))
 
-            with date_col1:
-                st.write('Number of Unique Values:')
-                st.write('Number of Rows with Missing Values:')
-                st.write('Number of Weekend Dates:')
-                st.write('Number of Weekday Dates:')
-                st.write('Number of Dates in Future:')
-                st.write('Number of Rows with 1900-01-01:')
-                st.write('Number of Rows with 1970-01-01:')
-                st.write('Minimum Value:')
-                st.write('Maximum Value:')
+                
+                #print table of basic information for this column
+                date_col1, date_col2 = st.columns(2)
 
-            #call datetime information from datetime functions
-            with date_col2:
-                st.write(date_serie.get_unique())
-                st.write(date_serie.get_missing())
-                st.write(date_serie.get_weekend())
-                st.write(date_serie.get_weekday())
-                st.write(date_serie.get_future())
-                st.write(date_serie.get_empty_1900())
-                st.write(date_serie.get_empty_1970())
-                st.write(date_serie.get_min())
-                st.write(date_serie.get_max())
+                with date_col1:
+                    st.write('Number of Unique Values:')
+                    st.write('Number of Rows with Missing Values:')
+                    st.write('Number of Weekend Dates:')
+                    st.write('Number of Weekday Dates:')
+                    st.write('Number of Dates in Future:')
+                    st.write('Number of Rows with 1900-01-01:')
+                    st.write('Number of Rows with 1970-01-01:')
+                    st.write('Minimum Value:')
+                    st.write('Maximum Value:')
 
-            st.markdown('')
-            st.markdown('**Bar Chart**')
-            date_serie.get_barchart()
+                #call datetime information from datetime functions
+                with date_col2:
+                    st.write(date_serie.get_unique())
+                    st.write(date_serie.get_missing())
+                    st.write(date_serie.get_weekend())
+                    st.write(date_serie.get_weekday())
+                    st.write(date_serie.get_future())
+                    st.write(date_serie.get_empty_1900())
+                    st.write(date_serie.get_empty_1970())
+                    st.write(date_serie.get_min())
+                    st.write(date_serie.get_max())
+
+                st.markdown('')
+                st.markdown('**Bar Chart**')
+                date_serie.get_barchart()
 
 
-            st.markdown('')
-            st.markdown('**Most Frequent Values**')
-            st.table(date_serie.get_frequent())
+                st.markdown('')
+                st.markdown('**Most Frequent Values**')
+                st.table(date_serie.get_frequent())
 
 
 
