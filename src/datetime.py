@@ -104,8 +104,9 @@ class DateColumn:
     """
     Return the Pandas dataframe containing the occurrences and percentage of the top 20 most frequent values
     """
+    n = 20
     df = self.serie.value_counts().reset_index()
     df.columns = ['date', 'occurance']
 
     df['percentage'] = (df['occurance'] / df['occurance'].sum()) * 100
-    return df
+    return df.head(n)
