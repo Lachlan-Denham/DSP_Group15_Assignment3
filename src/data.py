@@ -6,84 +6,86 @@ import pandas as pd
 
 @dataclass
 class Dataset:
-  name: str
-  df: pd.DataFrame
-  
-  def get_name(self):
-    """
+    name: str
+    df: pd.DataFrame
+
+    def get_name(self):
+        """
     Return filename of loaded dataset
     """
-    return self.name
+        return None
 
-  def get_n_rows(self):
-    """
+    def get_n_rows(self):
+        """
       Return number of rows of loaded dataset
     """
-    return self.df.shape[0]
+        return None
 
-  def get_n_cols(self):
-    """
+    def get_n_cols(self):
+        """
       Return number of columns of loaded dataset
     """
-    return self.df.shape[1]
+        return None
 
-  def get_cols_list(self):
-    """
+    def get_cols_list(self):
+        """
       Return list column names of loaded dataset
     """
-    return list(self.df.columns)
+        return None
 
-  def get_cols_dtype(self):
-    """
+    def get_cols_dtype(self):
+        """
       Return dictionary with column name as keys and data type as values
     """
-    return self.df.dtypes
+        return None
 
-  def get_n_duplicates(self):
-    """
+    def get_n_duplicates(self):
+        """
       Return number of duplicated rows of loaded dataset
     """
-    return len(self.df[self.df.duplicated() == True])
+        return None
 
-  def get_n_missing(self):
-    """
+    def get_n_missing(self):
+        """
       Return number of rows with missing values of loaded dataset
     """
-    return self.df.isnull().any(axis=1).sum() 
+        return None
 
-  def get_head(self, n=5):
-    """
+    def get_head(self, n=5):
+        """
       Return Pandas Dataframe with top rows of loaded dataset
     """
-    return self.df.head(n)
+        return None
 
-  def get_tail(self, n=5):
-    """
+    def get_tail(self, n=5):
+        """
       Return Pandas Dataframe with bottom rows of loaded dataset
     """
-    return self.df.tail(n)
+        return None
 
-  def get_sample(self, n=5):
-    """
+    def get_sample(self, n=5):
+        """
       Return Pandas Dataframe with random sampled rows of loaded dataset
     """
-    return self.df.sample(n)
+        return None
 
-  def get_numeric_columns(self):
-    """
+    def get_numeric_columns(self):
+        """
       Return list column names of numeric type from loaded dataset
     """
-    return self.df.select_dtypes(include='number').columns.to_list()
+        return None
 
-  def get_text_columns(self):
-    """
+    def get_text_columns(self):
+        """
       Return list column names of text type from loaded dataset
     """
-    return self.df.select_dtypes(include='object').columns.to_list()
+        return None
 
-  def get_date_columns(self):
-    """
+    def get_date_columns(self):
+        """
       Return list column names of datetime type from loaded dataset
     """
-    return self.df.select_dtypes(include='datetime').columns.to_list()
+        return None
 
+    def get_series(self):
+        return None
