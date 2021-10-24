@@ -16,7 +16,6 @@ class TestData(unittest.TestCase):
         result = ds.get_name()
         expected = df.name
 
-
         self.assertEqual(result, expected)
 
     def test_get_n_rows(self):

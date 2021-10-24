@@ -75,10 +75,21 @@ class NumericColumn:
     Return the generated histogram for selected column
     """
 
-    return None
+    freq = self.serie.value_counts().reset_index()
+    freq.columns = ['Values', 'Occurance']
+
+    histogram = alt.Chart(freq).mark_bar().encode(
+      x=alt.X('Values', title=self.col_name),
+      y='Occurance')
+
+    return st.altair_chart(histogram, use_container_width=True)
 
   def get_frequent(self):
     """
     Return the Pandas dataframe containing the occurrences and percentage of the top 20 most frequent values
     """
-    return None
+    freq = self.serie.value_counts().reset_index()
+    freq.columns = ['Values', 'Occurance']
+    freq['Percentage'] = (freq['Occurance'] / freq['Occurance'].sum())
+
+    return freq.head(20)

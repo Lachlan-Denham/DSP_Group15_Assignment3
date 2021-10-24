@@ -4,8 +4,11 @@
 
 # Authors
 Amelia Craigie 14391888
+
 Declan Stockdale
+
 Ivan Cheung
+
 Lachlan Denham 13246614
 
 # Structure
