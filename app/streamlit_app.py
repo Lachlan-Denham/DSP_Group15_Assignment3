@@ -133,7 +133,7 @@ def launchApp():
                 st.markdown('')
                 st.markdown('**Field Name: *' + option + '* **')
 
-                txt_option = (ds.get_series(option)) # was (option, ds.get_series(option))
+                txt_option = (ds.get_series(option))
 
                 text_col1, text_col2 = st.columns(2)
 
