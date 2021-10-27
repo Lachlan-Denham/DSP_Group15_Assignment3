@@ -8,7 +8,7 @@ import pandas as pd
 class Dataset:
   name: str
   df: pd.DataFrame
-  
+
   def get_name(self):
     """
     Return filename of loaded dataset
@@ -49,7 +49,7 @@ class Dataset:
     """
       Return number of rows with missing values of loaded dataset
     """
-    return self.df.isnull().any(axis=1).sum() 
+    return self.df.isnull().any(axis=1).sum()
 
   def get_head(self, n=5):
     """
@@ -81,6 +81,11 @@ class Dataset:
     """
     return self.df.select_dtypes(include='object').columns.to_list()
 
+  def get_not_text_columns(self): # used to only display non text types to convert to text
+    """
+      Return list column names of text type from loaded dataset
+    """
+    return self.df.select_dtypes(exclude='object').columns.to_list()
   def get_date_columns(self):
     """
       Return list column names of datetime type from loaded dataset

@@ -14,7 +14,7 @@ def load_csv(csv_file):
     return ds
 
 def launchApp():
-    
+
 
 
 
@@ -44,7 +44,7 @@ def launchApp():
 
     #1. 'Overall Information of the Dataset' Section
     with studentA:
-        
+
         #Overall Information Header
         st.header('Overall Information')
         st.subheader('Section by Lachlan Denham')
@@ -61,14 +61,14 @@ def launchApp():
             st.markdown('**Number of Columns:** ' + str(ds.get_n_cols()))
             st.markdown('**Number of Duplicated Rows:** ' + str(ds.get_n_duplicates()))
             st.markdown('**Number of Rows with Missing Values:** ' + str(ds.get_n_missing()))
-            
+
             st.markdown('**List of Columns:** ')
             st.text(ds.get_cols_list())
 
             #Denotes the column types and displays the relevant information in a dataframe visual element
             st.markdown('**Type of Columns:** ')
             st.dataframe(ds.get_cols_dtype().astype(str), 400, 500)
-            
+
             #Displays Row samples taken from the beginning, end and randomly from each respective visual element.
             #Implements a slider to determine how many dataframe rows should be displayed in each element.
             rowNumberSlider = st.slider('Select the number of rows to be displayed')
@@ -87,8 +87,8 @@ def launchApp():
             if convertButton:
                 ds.df[conversionSelect] = pd.to_datetime(ds.df[conversionSelect])
                 st.experimental_rerun()
-        
-        #Page display elements when no CSV file is accessible. 
+
+        #Page display elements when no CSV file is accessible.
         #Largely repeats elements found in the above code without the necessary function calls to dataclass elements
         else:
             st.markdown('**Name of Table:** ')
@@ -105,8 +105,8 @@ def launchApp():
             st.selectbox('Which columns do you want to convert to dates', ['N/A'])
             st.button('Convert Selected Column')
 
-            
-        
+
+
 
     with studentB:
         st.header('Information on each numeric column')
@@ -114,17 +114,59 @@ def launchApp():
 
 
 
-    with studentC:
+    with studentC: # Declan
         st.header('Information on each text column')
 
+        if csv_file is not None:
 
+            conversionSelect = st.selectbox('Which columns do you want to convert to text',ds.get_not_text_columns())# ds.get_cols_list())
+
+            st.write('Current selection: ' + conversionSelect)
+            convertButton = st.button('Convert Selected Column to string')
+            if convertButton:
+                ds.df[conversionSelect] = ds.df[conversionSelect].apply(str)
+                st.experimental_rerun()
+
+            #check that text colum has been selected
+            option = st.selectbox('Select a text column to explore:', ds.get_text_columns())
+            if option is not None:
+                st.markdown('')
+                st.markdown('**Field Name: *' + option + '* **')
+
+                txt_option = (ds.get_series(option)) # was (option, ds.get_series(option))
+
+                text_col1, text_col2 = st.columns(2)
+
+                with text_col1:
+                    st.write('Number of Unique Values:')
+                    st.write('Number of Rows with Missing Values:')
+                    st.write('Number of empty rows:')
+                    st.write('Number of rows with only whitespaces:')
+                    st.write('Number of rows with only lower case characters:')
+                    st.write('Number of rows with only upper case characters:')
+                    st.write('Number of rows with only alphabet characters:')
+                    st.write('Display number of rows with only numbers as characters:')
+                    st.write('Mode value:')
+
+                with text_col2:
+                    st.write(txt_option.nunique())
+                    st.write(txt_option.isna().sum()) # need to clarify this
+                    st.write(txt_option.isnull().sum())
+
+                    st.write(txt_option.str.isspace().sum()) # what?
+                    st.write(txt_option.str.islower().sum()) # lower
+                    st.write(txt_option.str.isupper().sum()) #upper
+                    st.write(txt_option.str.isalpha().sum()) # letters
+                    st.write(txt_option.str.isdigit().sum()) # numeric
+                    st.write(txt_option.str.isalnum().sum()) # alphanumeric
+                    st.write(txt_option.mode()[0])
 
     with studentD:
         #check if csv has been loaded. Only display this section if csv_file is not None.
         if csv_file is not None:
             st.header('Information on datetime columns')
             option = st.selectbox('Select a <Datetime> column to explore:', ds.get_date_columns())
-            
+
             #check if a datetime colum has been selected
             if option is not None:
                 st.markdown('')
@@ -132,7 +174,7 @@ def launchApp():
                 #create the data series from the selected option
                 date_serie = DateColumn(option, ds.get_series(option))
 
-                
+
                 #print table of basic information for this column
                 date_col1, date_col2 = st.columns(2)
 
