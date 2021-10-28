@@ -83,9 +83,10 @@ class Dataset:
 
   def get_not_text_columns(self): # used to only display non text types to convert to text
     """
-      Return list column names of text type from loaded dataset
+      Return list column names of everything else but object/text type from loaded dataset
     """
     return self.df.select_dtypes(exclude='object').columns.to_list()
+
   def get_date_columns(self):
     """
       Return list column names of datetime type from loaded dataset

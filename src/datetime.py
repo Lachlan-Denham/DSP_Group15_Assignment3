@@ -44,7 +44,7 @@ class DateColumn:
     """
     df = self.serie.dt.dayofweek
     return df.isin([0,1,2,3,4]).sum()
-  
+
   def get_future(self):
     """
     The dates in the series are evaluated by the pandas function .to_datetime('today')
@@ -81,7 +81,7 @@ class DateColumn:
 
   def get_max(self):
     """
-    Return the maximum date 
+    Return the maximum date
     """
     return self.serie.max()
 
@@ -92,7 +92,7 @@ class DateColumn:
 
     df = self.serie.value_counts().reset_index()
     df.columns = ['Date', 'Number of Occurances']
-    
+
     chart = alt.Chart(df).mark_bar().encode(
         x= alt.X('Date', title= self.col_name),
         y='Number of Occurances'

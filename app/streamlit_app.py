@@ -4,6 +4,7 @@ from pandas.core.series import Series
 import streamlit as st
 import pandas as pd
 from src.data import Dataset
+from src.text import TextColumn
 from src.datetime import DateColumn
 
 
@@ -133,7 +134,7 @@ def launchApp():
                 st.markdown('')
                 st.markdown('**Field Name: *' + option + '* **')
 
-                txt_option = (ds.get_series(option))
+                txt_serie = TextColumn(option, ds.get_series(option))
 
                 text_col1, text_col2 = st.columns(2)
 
@@ -147,19 +148,27 @@ def launchApp():
                     st.write('Number of rows with only alphabet characters:')
                     st.write('Display number of rows with only numbers as characters:')
                     st.write('Mode value:')
+                    st.write('total Mode values:') # delete later
 
                 with text_col2:
-                    st.write(txt_option.nunique())
-                    st.write(txt_option.isna().sum()) # need to clarify this
-                    st.write(txt_option.isnull().sum())
+                    st.write(txt_serie.get_unique())
+                    st.write(txt_serie.get_missing())
+                    st.write(txt_serie.get_empty())
+                    st.write(txt_serie.get_whitespace()) # what?
+                    st.write(txt_serie.get_lowercase()) # lower
+                    st.write(txt_serie.get_uppercase()) #upper
+                    st.write(txt_serie.get_alphabet()) # letters
+                    st.write(txt_serie.get_digit()) # numeric
+                    st.write(txt_serie.get_mode())
 
-                    st.write(txt_option.str.isspace().sum()) # what?
-                    st.write(txt_option.str.islower().sum()) # lower
-                    st.write(txt_option.str.isupper().sum()) #upper
-                    st.write(txt_option.str.isalpha().sum()) # letters
-                    st.write(txt_option.str.isdigit().sum()) # numeric
-                    st.write(txt_option.str.isalnum().sum()) # alphanumeric
-                    st.write(txt_option.mode()[0])
+                st.markdown('')
+                st.markdown('**Bar Chart**')
+                txt_serie.get_barchart()
+
+
+                st.markdown('')
+                st.markdown('**Most Frequent Values**')
+                st.table(txt_serie.get_frequent())
 
     with studentD:
         #check if csv has been loaded. Only display this section if csv_file is not None.
