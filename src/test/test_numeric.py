@@ -7,6 +7,9 @@ df = pd.read_csv(csv_file, sep=',').select_dtypes(include=['float64'])
 print('Return name of selected column')
 print(df.columns)
 
+print('Return full list of details')
+print(df.describe())
+
 print('Return number of unique values for selected column')
 print(df[df.columns].nunique())
 
