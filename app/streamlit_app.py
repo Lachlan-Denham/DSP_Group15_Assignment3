@@ -64,7 +64,12 @@ def launchApp():
             st.markdown('**Number of Rows with Missing Values:** ' + str(ds.get_n_missing()))
 
             st.markdown('**List of Columns:** ')
-            st.text(ds.get_cols_list())
+            
+            column_names = list(ds.get_cols_list())
+
+            bracketless_column_names = (', '.join(repr(e) for e in column_names))
+            column_names_clean = bracketless_column_names.replace("'", "")
+            st.text(column_names_clean)
 
             #Denotes the column types and displays the relevant information in a dataframe visual element
             st.markdown('**Type of Columns:** ')
