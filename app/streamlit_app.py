@@ -6,6 +6,7 @@ import pandas as pd
 from src.data import Dataset
 from src.text import TextColumn
 from src.datetime import DateColumn
+from src.numeric import NumericColumn
 
 
 #Function for adding the uploaded dataset to the webpage cache
