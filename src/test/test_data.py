@@ -16,6 +16,7 @@ class TestData(unittest.TestCase):
         result = ds.get_name()
         expected = df.name
 
+
         self.assertEqual(result, expected)
 
     def test_get_n_rows(self):
@@ -109,4 +110,3 @@ class TestData(unittest.TestCase):
         expected = self.df.select_dtypes(include='datetime').columns.to_list()
 
         self.assertEqual(result, expected)
-

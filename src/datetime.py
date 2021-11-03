@@ -10,6 +10,9 @@ class DateColumn:
   col_name: str
   serie: pd.Series
 
+  def get_series(self):
+    return self.serie
+
   def get_name(self):
     """
     Return name of selected column
@@ -47,6 +50,7 @@ class DateColumn:
     The dates in the series are evaluated by the pandas function .to_datetime('today')
     to return a new series containing only dates which are greater than this date.
     the size of the series is then counted to get the output.
+
     Return number of cases with future dates (after today)
     """
     ds = self.serie
