@@ -68,22 +68,27 @@ class TextColumn:
     """
     Return the mode value for selected column
     """
-    return self.serie.mode()[0]
+    return self.serie.mode()
 
 
-  def get_barchart(self):
+  def get_barchart(self, col_name):
     """
     Return the generated bar chart for selected column  - bar chart is sorted
     """
 
     df = self.serie.value_counts().reset_index() # works
-    df.columns = ['Value', 'Number of Occurances']
+    #df.columns = ['Value', 'Number of Occurances']
+    col_name = str(col_name)
+    df.columns = [col_name, 'Count of Records']
 
     chart = alt.Chart(df).mark_bar().encode(
-        x = alt.X('Value', sort=alt.EncodingSortField(field="Number of Occurances", op="count", order='ascending')),
-        y = alt.Y('Number of Occurances',axis=alt.Axis(tickMinStep=1)) # added tick
+        x = alt.X(col_name, sort=alt.EncodingSortField(field="Number of Occurances", op="count", order='ascending')),#'Value'
+        y = alt.Y('Count of Records',axis=alt.Axis(tickMinStep=1)) # added tick
         )
+
     return st.altair_chart(chart, use_container_width=True)
+
+
 
   def get_frequent(self):
     """
@@ -94,4 +99,5 @@ class TextColumn:
     df.columns = ['Value', 'Occurance']
 
     df['Percentage %'] = (df['Occurance'] / df['Occurance'].sum()) * 100
+
     return df.head(n)

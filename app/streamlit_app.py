@@ -64,7 +64,7 @@ def launchApp():
             st.markdown('**Number of Rows with Missing Values:** ' + str(ds.get_n_missing()))
 
             st.markdown('**List of Columns:** ')
-            
+
             column_names = list(ds.get_cols_list())
 
             bracketless_column_names = (', '.join(repr(e) for e in column_names))
@@ -159,59 +159,59 @@ def launchApp():
 
 
     with studentC: # Declan
-        st.header('Information on each text column')
 
         if csv_file is not None:
+            st.header('3. Text Column Information')
+            '''
+            Section allows for conversion of non string/text/object datatypes to string
 
-            conversionSelect = st.selectbox('Which columns do you want to convert to text',ds.get_not_text_columns())# ds.get_cols_list())
-
+            conversionSelect = st.selectbox('Which columns do you want to convert to text',ds.get_not_text_columns())
             st.write('Current selection: ' + conversionSelect)
             convertButton = st.button('Convert Selected Column to string')
             if convertButton:
                 ds.df[conversionSelect] = ds.df[conversionSelect].apply(str)
                 st.experimental_rerun()
+            '''
 
-            #check that text colum has been selected
-            option = st.selectbox('Select a text column to explore:', ds.get_text_columns())
-            if option is not None:
+            i = 0
+            for col_name in ds.get_text_columns():
                 st.markdown('')
-                st.markdown('**Field Name: *' + option + '* **')
+                subheader_str = (f"3.{i} Field Name: _{col_name}_")
+                st.subheader(subheader_str)
 
-                txt_serie = TextColumn(option, ds.get_series(option))
+                txt_serie = TextColumn(col_name, ds.get_series(col_name))
 
-                text_col1, text_col2 = st.columns(2)
+                df1 = pd.DataFrame({'Value': [txt_serie.get_unique(),
+                                              txt_serie.get_missing(),
+                                              txt_serie.get_empty(),
+                                              txt_serie.get_whitespace(),
+                                              txt_serie.get_lowercase(),
+                                              txt_serie.get_uppercase(),
+                                              txt_serie.get_alphabet(),
+                                              txt_serie.get_digit(),
+                                              txt_serie.get_mode()[0]]},
+                                  index=['Number of Unique Values',
+                                         'Number of Rows with Missing Values',
+                                         'Number of Empty rows',
+                                         'Number of Rows with only whitespaces',
+                                         'Number of Rows with only lower case characters',
+                                         'Number of Rows with only upper case characters',
+                                         'Number of Rows with only alphabet characters',
+                                         'Number of rows with only numbers as characters',
+                                         'Mode value'])
 
-                with text_col1:
-                    st.write('Number of Unique Values:')
-                    st.write('Number of Rows with Missing Values:')
-                    st.write('Number of empty rows:')
-                    st.write('Number of rows with only whitespaces:')
-                    st.write('Number of rows with only lower case characters:')
-                    st.write('Number of rows with only upper case characters:')
-                    st.write('Number of rows with only alphabet characters:')
-                    st.write('Display number of rows with only numbers as characters:')
-                    st.write('Mode value:')
-                    st.write('total Mode values:') # delete later
-
-                with text_col2:
-                    st.write(txt_serie.get_unique())
-                    st.write(txt_serie.get_missing())
-                    st.write(txt_serie.get_empty())
-                    st.write(txt_serie.get_whitespace()) # what?
-                    st.write(txt_serie.get_lowercase()) # lower
-                    st.write(txt_serie.get_uppercase()) #upper
-                    st.write(txt_serie.get_alphabet()) # letters
-                    st.write(txt_serie.get_digit()) # numeric
-                    st.write(txt_serie.get_mode())
+                df1 = df1.astype(str)
+                st.dataframe(df1.style.set_properties(**{'text-align': 'right'}).hide_index())
 
                 st.markdown('')
                 st.markdown('**Bar Chart**')
-                txt_serie.get_barchart()
-
+                txt_serie.get_barchart(col_name)
 
                 st.markdown('')
                 st.markdown('**Most Frequent Values**')
                 st.table(txt_serie.get_frequent())
+
+                i = i+1
 
     with studentD:
         #check if csv has been loaded. Only display this section if csv_file is not None.
