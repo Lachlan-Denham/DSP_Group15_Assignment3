@@ -10,9 +10,6 @@ class DateColumn:
   col_name: str
   serie: pd.Series
 
-  def get_series(self):
-    return self.serie
-
   def get_name(self):
     """
     Return name of selected column
