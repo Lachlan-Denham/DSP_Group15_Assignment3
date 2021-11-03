@@ -116,7 +116,45 @@ def launchApp():
 
     with studentB:
         st.header('Information on each numeric column')
+        st.subheader('Section by Amelia Craigie')
 
+        if csv_file is not None:
+            num_select = st.selectbox('Select a numeric column to explore:', ds.get_numeric_columns())
+
+            if num_select is not None:
+                st.markdown('')
+                st.markdown('**Field Name: *' + num_select + '* **')
+
+                num_serie = NumericColumn(num_select, ds.get_series(num_select))
+                text_col1, text_col2 = st.columns(2)
+
+                with text_col1:
+                    st.write('Number of Unique Values:')
+                    st.write('Number of Rows with Missing Values:')
+                    st.write('Number of Rows with 0 Value:')
+                    st.write('Number of Rows with Negative Value:')
+                    st.write('Average Value:')
+                    st.write('Std. Dev. Value:')
+                    st.write('Minimum Value:')
+                    st.write('Maximum Value:')
+
+                with text_col2:
+                    st.write(num_serie.get_unique())
+                    st.write(num_serie.get_missing())
+                    st.write(num_serie.get_zeros())
+                    st.write(num_serie.get_negatives())
+                    st.write(num_serie.get_mean())
+                    st.write(num_serie.get_std())
+                    st.write(num_serie.get_min())
+                    st.write(num_serie.get_max())
+
+                st.markdown('')
+                st.markdown('**Histogram: **')
+                num_serie.get_histogram()
+
+                st.markdown('')
+                st.markdown('**Top 20 Frequent Values**')
+                st.table(num_serie.get_frequent())
 
 
 

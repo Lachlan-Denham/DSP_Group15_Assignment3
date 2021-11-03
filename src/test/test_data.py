@@ -110,4 +110,3 @@ class TestData(unittest.TestCase):
         expected = self.df.select_dtypes(include='datetime').columns.to_list()
 
         self.assertEqual(result, expected)
-
