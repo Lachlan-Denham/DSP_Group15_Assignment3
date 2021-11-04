@@ -6,6 +6,7 @@ import pandas as pd
 from src.data import Dataset
 from src.text import TextColumn
 from src.datetime import DateColumn
+from src.numeric import NumericColumn
 
 
 #Function for adding the uploaded dataset to the webpage cache
@@ -31,7 +32,10 @@ def launchApp():
 
     #Page title Container
     with header:
-        st.title('DSP Assignment 3')
+        st.title('Data Explorer Web Application')
+        st.write('**Developed by Group 15 for Data Science Practice Assignment 3**')
+        st.write('This web app is designed to perform exploratory data analysis on a dataset (CSV files only) provided by the user. The analyses produce information in four key sections; the overall dataset, numeric data, text data and datetime data.')
+        st.write(' ')
 
         #File uploader widget which is restricted to csv filetypes
         csv_file = st.file_uploader("Choose a CSV file", type=['csv'])
@@ -155,6 +159,9 @@ def launchApp():
                 st.markdown('')
                 st.markdown('**Top 20 Frequent Values**')
                 st.table(num_serie.get_frequent())
+        else:
+            st.write('No dataset provided, please input CSV file.')
+            st.write(' ')
 
 
 
