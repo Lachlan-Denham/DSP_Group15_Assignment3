@@ -12,6 +12,8 @@ class DateColumn:
 
   def get_name(self):
     """
+    This method returns the stored name of the column from the object initiation.
+
     Return name of selected column
     """
     return self.col_name
@@ -84,7 +86,10 @@ class DateColumn:
 
   def get_barchart(self):
     """
-    Return the generated bar chart for selected column
+    This function creates a new dataframe based on the frequency of occurances for each discrete date.
+    The dataframe is then plotted on an altair bar chart. The X axis is sorted from earliest to latest date.
+
+    Returns the generated bar chart for selected column
     """
 
     df = self.serie.value_counts().reset_index()
@@ -99,7 +104,10 @@ class DateColumn:
 
   def get_frequent(self):
     """
-    Return the Pandas dataframe containing the occurrences and percentage of the top 20 most frequent values
+    This function creates a new dataframe based on the frequency of occurances for each discrete date.
+    The new dataframe is then reduced to the top 20 results
+
+    Returns the Pandas dataframe containing the occurrences and percentage of the top 20 most frequent values
     """
     n = 20
     df = self.serie.value_counts().reset_index()
