@@ -8,9 +8,9 @@ import pandas as pd
 df = pd.read_csv('Test_Dataset.csv')
 ds = data.Dataset('Test_Dataset.csv', df)
 class TestData(unittest.TestCase):
-   
-    
-    
+
+
+
     def test_get_name(self):
 
         result = ds.get_name()
