@@ -4,8 +4,6 @@ from pandas.core.frame import DataFrame
 from .. import text
 import pandas as pd
 
-
-
 test_csv = "C:/Users/Declan/Downloads/food-consumption.csv"
 df = pd.read_csv(test_csv)
 ds = data.Dataset(test_csv,df)
