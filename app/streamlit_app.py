@@ -8,7 +8,6 @@ from src.text import TextColumn
 from src.datetime import DateColumn
 from src.numeric import NumericColumn
 
-
 #Function for adding the uploaded dataset to the webpage cache
 @st.cache(allow_output_mutation=True)
 def load_csv(csv_file):
