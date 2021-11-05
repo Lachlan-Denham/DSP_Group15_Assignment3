@@ -168,11 +168,11 @@ def launchApp():
 
 
     with studentC: # Declan
-        st.header('Information on each text column')
+        st.header('3. Text Column Information')
         st.subheader('Section by Declan Stockdale')
 
         if csv_file is not None:
-            st.header('3. Text Column Information')
+
             '''
             Section allows for conversion of non string/text/object datatypes to string
 
@@ -232,7 +232,7 @@ def launchApp():
         st.subheader('Section by Ivan Cheung')
         #check if csv has been loaded. Only display this section if csv_file is not None.
         if csv_file is not None:
-            st.header('Information on datetime columns')
+
             option = st.selectbox('Select a <Datetime> column to explore:', ds.get_date_columns())
 
             #check if a datetime colum has been selected
