@@ -81,7 +81,7 @@ def launchApp():
 
             #Displays Row samples taken from the beginning, end and randomly from each respective visual element.
             #Implements a slider to determine how many dataframe rows should be displayed in each element.
-            rowNumberSlider = st.slider('Select the number of rows to be displayed')
+            rowNumberSlider = st.slider('Select the number of rows to be displayed', value=5)
             st.markdown('**Top Rows of Table**')
             st.dataframe(ds.get_head(rowNumberSlider))
             st.markdown('**Bottom rows of Table**')
@@ -95,7 +95,7 @@ def launchApp():
             st.write('Current selection: ' + conversionSelect)
             convertButton = st.button('Convert Selected Column')
             if convertButton:
-                ds.df[conversionSelect] = pd.to_datetime(ds.df[conversionSelect])
+                ds.df[conversionSelect] = pd.to_datetime(ds.df[conversionSelect].astype(str), infer_datetime_format=True)
                 st.experimental_rerun()
 
         #Page display elements when no CSV file is accessible.
@@ -108,7 +108,7 @@ def launchApp():
             st.markdown('**Number of Rows with Missing Values:** ')
             st.markdown('**List of Columns:** ')
             st.markdown('**Type of Columns:** ')
-            st.slider('Select the number of rows to be displayed')
+            st.slider('Select the number of rows to be displayed', value=5)
             st.markdown('**Top Rows of Table**')
             st.markdown('**Bottom rows of Table**')
             st.markdown('**Random Sample Rows of Table**')
