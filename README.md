@@ -19,4 +19,4 @@ main.py is used to run the app and was created to bypass issues with relative im
 # Instructions
 Run on a Python 3.8.2 Environment with the imports seen in the requirements.txt  
 requirements.txt imports could likely be streamlined, the file was created by funnelling imports from Lachlan's 3.8.2 virtual environment.  
-Alternatively run on docker using the steps provided in the report.  
+Alternatively, it can be run more easily on docker using the steps provided in the report.  
