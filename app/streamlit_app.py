@@ -168,7 +168,7 @@ def launchApp():
 
 
     with studentC: # Declan
-        st.header('Information on each numeric column')
+        st.header('Information on each text column')
         st.subheader('Section by Declan Stockdale')
 
         if csv_file is not None:
@@ -228,7 +228,7 @@ def launchApp():
             st.write(' ')
 
     with studentD:
-        st.header('Information on each numeric column')
+        st.header('Information on each datetime column')
         st.subheader('Section by Ivan Cheung')
         #check if csv has been loaded. Only display this section if csv_file is not None.
         if csv_file is not None:
