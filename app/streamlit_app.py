@@ -46,7 +46,6 @@ def launchApp():
 
 
 
-
     #1. 'Overall Information of the Dataset' Section
     with studentA:
 
@@ -100,21 +99,24 @@ def launchApp():
 
         #Page display elements when no CSV file is accessible.
         #Largely repeats elements found in the above code without the necessary function calls to dataclass elements
-        else:
-            st.markdown('**Name of Table:** ')
-            st.markdown('**Number of Rows:** ')
-            st.markdown('**Number of Columns:** ')
-            st.markdown('**Number of Duplicated Rows:** ')
-            st.markdown('**Number of Rows with Missing Values:** ')
-            st.markdown('**List of Columns:** ')
-            st.markdown('**Type of Columns:** ')
-            st.slider('Select the number of rows to be displayed', value=5)
-            st.markdown('**Top Rows of Table**')
-            st.markdown('**Bottom rows of Table**')
-            st.markdown('**Random Sample Rows of Table**')
-            st.selectbox('Which columns do you want to convert to dates', ['N/A'])
-            st.button('Convert Selected Column')
 
+        #else:
+        #    st.markdown('**Name of Table:** ')
+        #    st.markdown('**Number of Rows:** ')
+        #    st.markdown('**Number of Columns:** ')
+        #    st.markdown('**Number of Duplicated Rows:** ')
+        #    st.markdown('**Number of Rows with Missing Values:** ')
+        #    st.markdown('**List of Columns:** ')
+        #    st.markdown('**Type of Columns:** ')
+        #    st.slider('Select the number of rows to be displayed', value=5)
+        #    st.markdown('**Top Rows of Table**')
+        #    st.markdown('**Bottom rows of Table**')
+        #    st.markdown('**Random Sample Rows of Table**')
+        #    st.selectbox('Which columns do you want to convert to dates', ['N/A'])
+        #    st.button('Convert Selected Column')
+        else:
+            st.write('No dataset provided, please input CSV file.')
+            st.write(' ')
 
 
 
@@ -166,6 +168,8 @@ def launchApp():
 
 
     with studentC: # Declan
+        st.header('Information on each numeric column')
+        st.subheader('Section by Declan Stockdale')
 
         if csv_file is not None:
             st.header('3. Text Column Information')
@@ -219,8 +223,13 @@ def launchApp():
                 st.table(txt_serie.get_frequent())
 
                 i = i+1
+        else:
+            st.write('No dataset provided, please input CSV file.')
+            st.write(' ')
 
     with studentD:
+        st.header('Information on each numeric column')
+        st.subheader('Section by Ivan Cheung')
         #check if csv has been loaded. Only display this section if csv_file is not None.
         if csv_file is not None:
             st.header('Information on datetime columns')
@@ -268,6 +277,10 @@ def launchApp():
                 st.markdown('')
                 st.markdown('**Most Frequent Values**')
                 st.table(date_serie.get_frequent())
+
+        else:
+            st.write('No dataset provided, please input CSV file.')
+            st.write(' ')
 
 
 
